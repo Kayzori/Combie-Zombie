@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://do1s2hyuhm3fu"]
+
+[ext_resource type="PackedScene" uid="uid://4lva68r8lx51" path="res://Entities/Weapons/WeaponClassNode/Weapon.tscn" id="1_q6dxt"]
+[ext_resource type="PackedScene" uid="uid://jahsy1s2jhcd" path="res://Entities/Weapons/Ammo/Bullet/Bullet.tscn" id="2_3djcq"]
+[ext_resource type="Script" uid="uid://b53nvt7wviepp" path="res://Entities/Weapons/Ammo/Bullet/BulletSpecs.gd" id="3_qdcw1"]
+[ext_resource type="Script" uid="uid://141ifrtgsxrk" path="res://Entities/Weapons/WeaponClassNode/WeaponSpecs.gd" id="3_x3mag"]
+[ext_resource type="Texture2D" uid="uid://crl4wq0dq8s0s" path="res://Entities/Weapons/Asset/Guns.png" id="4_3ty0i"]
+
+[sub_resource type="Resource" id="Resource_qdcw1"]
+script = ExtResource("3_qdcw1")
+speed = 500.0
+damage = 0.0
+fatal_shot_chance = 0.0
+fatal_shot_damage_scale = 0.0
+metadata/_custom_type_script = "uid://b53nvt7wviepp"
+
+[sub_resource type="Resource" id="Resource_hufu5"]
+script = ExtResource("3_x3mag")
+name = &"LugerP08"
+ammo = ExtResource("2_3djcq")
+ammo_specs = SubResource("Resource_qdcw1")
+capacity = 8
+fire_rate = 0.5
+accurency = 5.0
+reload_time = 1.0
+metadata/_custom_type_script = "uid://141ifrtgsxrk"
+
+[node name="LugerP08" instance=ExtResource("1_q6dxt")]
+specs = SubResource("Resource_hufu5")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, 3)
+texture = ExtResource("4_3ty0i")
+region_enabled = true
+region_rect = Rect2(19, 20, 12, 8)
+
+[node name="Hole" parent="." index="1"]
+position = Vector2(5, 0)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpq1e0fenimgl"]
+
+[ext_resource type="Script" uid="uid://ds6620frtokf3" path="res://Addons/Components/FiniteStateMachine/FiniteStateMachine.gd" id="1_f825k"]
+
+[node name="FiniteStateMachine" type="Node"]
+script = ExtResource("1_f825k")
+metadata/_custom_type_script = "uid://ds6620frtokf3"

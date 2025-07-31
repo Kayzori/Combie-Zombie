@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://jahsy1s2jhcd"]
 
-[ext_resource type="Script" uid="uid://bf7wk1n1ros7u" path="res://Entities/Weapons/Bullet/Bullet.gd" id="1_b3kqw"]
+[ext_resource type="Script" uid="uid://bf7wk1n1ros7u" path="res://Entities/Weapons/Ammo/Bullet/Bullet.gd" id="1_b3kqw"]
 [ext_resource type="Texture2D" uid="uid://crl4wq0dq8s0s" path="res://Entities/Weapons/Asset/Guns.png" id="1_blds8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3kqw"]
-size = Vector2(2, 1)
+size = Vector2(6, 5)
 
 [node name="Bullet" type="Node2D"]
+z_index = 10
 script = ExtResource("1_b3kqw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

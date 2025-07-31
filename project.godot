@@ -18,6 +18,11 @@ config/icon="res://icon.svg"
 
 EntityPool="*res://Root/EntityPool/EntityPool.gd"
 
+[debug]
+
+gdscript/warnings/unused_signal=0
+gdscript/warnings/untyped_declaration=1
+
 [display]
 
 window/size/viewport_width=320
@@ -26,6 +31,23 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Components/FiniteStateMachine/plugin/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Addons/": "pink",
+"res://Entities/": "green",
+"res://Menu&UI/": "yellow",
+"res://Root/": "red"
+}
+
+[global_group]
+
+Player=""
 
 [input]
 

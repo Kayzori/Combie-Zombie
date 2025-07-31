@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://bri7nwvuii66p"]
+
+[ext_resource type="Texture2D" uid="uid://cutepvcnu4dxl" path="res://World/Asset/HouseParts.png" id="1_y6flb"]
+[ext_resource type="PackedScene" uid="uid://b213w1n2e4et" path="res://Entities/Player/Player.tscn" id="2_mlekv"]
+[ext_resource type="PackedScene" uid="uid://daueweaqpcnky" path="res://Menu&UI/Camera.tscn" id="3_mlekv"]
+
+[node name="World" type="Node2D"]
+
+[node name="House" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="House"]
+position = Vector2(0, -82.5)
+texture = ExtResource("1_y6flb")
+region_enabled = true
+region_rect = Rect2(88, 387, 384, 165)
+
+[node name="Sprite2D2" type="Sprite2D" parent="House"]
+texture = ExtResource("1_y6flb")
+region_enabled = true
+region_rect = Rect2(96, 64, 368, 256)
+
+[node name="Player" parent="House" instance=ExtResource("2_mlekv")]
+
+[node name="Sprite2D3" type="Sprite2D" parent="House"]
+modulate = Color(1, 1, 1, 0.666667)
+position = Vector2(0, -14)
+texture = ExtResource("1_y6flb")
+region_enabled = true
+region_rect = Rect2(88, 752, 384, 294)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-71.9394, -0.890926)
+polygon = PackedVector2Array(-112.061, 128.891, 255.939, 128.891, 255.939, -128.109, -0.0606232, -127.109, -0.0606232, 0.890926, -112.061, 0.890926, -112.061, 128.891, -120.061, 133.891, -120.061, -5.10907, -8.06062, -5.10907, -8.06062, -133.109, 263.939, -132.109, 263.939, 133.891, -120.061, 133.891)
+
+[node name="Camera2D" parent="." instance=ExtResource("3_mlekv")]

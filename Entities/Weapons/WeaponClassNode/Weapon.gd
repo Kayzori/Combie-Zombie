@@ -1,9 +1,8 @@
 extends Node2D
 class_name Weapon
 
-@export var weapon_specs: WeaponSpecs
-
-@onready var bullet_exit: Node2D = $BulletExit
+@export var specs: WeaponSpecs
+@onready var hole: Node2D = $Hole
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
 ## FLAGS ##
@@ -20,23 +19,27 @@ func _process(_delta: float) -> void:
 
 func fire() -> void:
     anim.play("shot")
-    var bullet: Bullet = weapon_specs._Bullet.instantiate()
-    bullet.global_position = bullet_exit.global_position
-    bullet.global_rotation = global_rotation + randf_range(-weapon_specs.Accurency, weapon_specs.Accurency)/100
-    EntityPool.add_child(bullet)
+    var ammo: Ammo = specs.ammo.instantiate()
+    ammo.specs = specs.ammo_specs
+    ammo.global_position = hole.global_position
+    ammo.global_rotation = global_rotation + randf_range(-specs.accurency, specs.accurency) / 100
+    EntityPool.add_child(ammo)
 
     magazine -= 1
+    print("ammo left: ", magazine)
     can_shot = false
-    await get_tree().create_timer(weapon_specs.Precision).timeout
+    await get_tree().create_timer(specs.fire_rate).timeout
     can_shot = true
 
 func reload(stock: int) -> int:
     if stock == 0:
         return 0
     is_reloading = true
-    await get_tree().create_timer(weapon_specs.ReloadTime).timeout
-    var space = weapon_specs.Capacity - magazine
-    var to_load = min(stock, space)
+    print("weapon is reloading")
+    await get_tree().create_timer(specs.reload_time).timeout
+    var to_load: int = min(stock, specs.capacity - magazine)
+    print("weapon is reloaded")
+    print("ammo left: ", magazine)
 
     magazine += to_load
     is_reloading = false

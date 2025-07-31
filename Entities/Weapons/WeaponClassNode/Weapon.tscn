@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://4lva68r8lx51"]
 
-[ext_resource type="Script" uid="uid://cfnaw5w3me5er" path="res://Entities/Weapons/Weapon/Weapon.gd" id="1_p8jdq"]
+[ext_resource type="Script" uid="uid://cfnaw5w3me5er" path="res://Entities/Weapons/WeaponClassNode/Weapon.gd" id="1_p8jdq"]
 
 [sub_resource type="Animation" id="Animation_steil"]
 resource_name = "shot"
@@ -30,7 +30,7 @@ metadata/_custom_type_script = "uid://cfnaw5w3me5er"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="BulletExit" type="Node2D" parent="."]
+[node name="Hole" type="Node2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
