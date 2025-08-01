@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://qicbns858sa7"]
+
+[ext_resource type="FontFile" uid="uid://b4rr38yvm7bmm" path="res://Menu&UI/Font/POWER-UP.ttf" id="1_nusj3"]
+[ext_resource type="Texture2D" uid="uid://dvk5t0x4407ul" path="res://Menu&UI/Theme/CraftingTable/Panel.png" id="2_oiw6g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nusj3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t4yqt"]
+texture = ExtResource("2_oiw6g")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t4yqt"]
+
+[resource]
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_nusj3")
+Label/font_sizes/font_size = 10
+Label/fonts/font = ExtResource("1_nusj3")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_t4yqt")
+VSeparator/styles/separator = SubResource("StyleBoxEmpty_t4yqt")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca51uvgyn0xqr"]
+
+[ext_resource type="PackedScene" uid="uid://cocs3uhwkb2ao" path="res://Entities/Player/Item/ItemClass/Item.tscn" id="1_onmco"]
+[ext_resource type="Script" uid="uid://cuhr4vhpk6f1y" path="res://Entities/Player/Item/Blood.gd" id="2_o0cn4"]
+[ext_resource type="Texture2D" uid="uid://b0pepiihc7uwo" path="res://Entities/Player/Item/Art/Blood.png" id="3_63qle"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmrbt"]
+atlas = ExtResource("3_63qle")
+region = Rect2(0, 0, 15, 15)
+
+[node name="Blood" instance=ExtResource("1_onmco")]
+offset_right = 69.0
+script = ExtResource("2_o0cn4")
+item_name = "Blood"
+
+[node name="TextureRect" parent="." index="0"]
+texture = SubResource("AtlasTexture_nmrbt")

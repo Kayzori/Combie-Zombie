@@ -1,39 +1,230 @@
-[gd_scene load_steps=6 format=3 uid="uid://b213w1n2e4et"]
+[gd_scene load_steps=35 format=3 uid="uid://b213w1n2e4et"]
 
 [ext_resource type="Script" uid="uid://c6i548v742bvc" path="res://Entities/Player/Player.gd" id="1_e5kic"]
 [ext_resource type="Script" uid="uid://ds6620frtokf3" path="res://Addons/Components/FiniteStateMachine/FiniteStateMachine.gd" id="2_vweq0"]
-[ext_resource type="PackedScene" uid="uid://do1s2hyuhm3fu" path="res://Entities/Weapons/Luger P08.tscn" id="2_ww0jn"]
+[ext_resource type="PackedScene" uid="uid://do1s2hyuhm3fu" path="res://Entities/Weapons/Guns/Luger P08/Luger P08.tscn" id="2_ww0jn"]
+[ext_resource type="Script" uid="uid://c6rkq14c2j5qi" path="res://Entities/Player/States/Idle.gd" id="3_t38ms"]
 [ext_resource type="PackedScene" uid="uid://daueweaqpcnky" path="res://Menu&UI/Camera.tscn" id="4_1des2"]
+[ext_resource type="Script" uid="uid://cmxgkjity3ay4" path="res://Entities/Player/States/Walk.gd" id="4_hj1c0"]
+[ext_resource type="Texture2D" uid="uid://chun0i2860fkw" path="res://Entities/Player/Art/SpriteSheet.png" id="5_an6q6"]
+[ext_resource type="Script" uid="uid://bu1883m17f8gy" path="res://Entities/Player/States/Dying.gd" id="5_x44r4"]
+[ext_resource type="Script" uid="uid://drsfbum0gldl" path="res://Entities/Player/Hand.gd" id="7_761t5"]
+[ext_resource type="Theme" uid="uid://du8h6s62dxjsd" path="res://Menu&UI/Theme/theme.tres" id="11_uw7o4"]
+[ext_resource type="Script" uid="uid://dd0dp5spxo017" path="res://Entities/Player/Stock.gd" id="12_061yh"]
+[ext_resource type="PackedScene" uid="uid://ca51uvgyn0xqr" path="res://Entities/Player/Item/Blood.tscn" id="12_vcmon"]
+[ext_resource type="PackedScene" uid="uid://dj5lb64s43x4t" path="res://Entities/Player/Item/SMG Bullets.tscn" id="13_5m37j"]
+[ext_resource type="PackedScene" uid="uid://djhbxsd0weynt" path="res://Entities/Player/Item/Pistol Bullets.tscn" id="13_061yh"]
+[ext_resource type="Script" uid="uid://dgpivxwnmp14i" path="res://Entities/Player/SlotContainer.gd" id="13_gallu"]
+[ext_resource type="PackedScene" uid="uid://b2uen78vwneio" path="res://Entities/Player/Item/Midkit.tscn" id="13_h6pxy"]
+[ext_resource type="PackedScene" uid="uid://cg8tgvv8udnpb" path="res://Entities/Player/Slot/Slot.tscn" id="13_uw7o4"]
+[ext_resource type="PackedScene" uid="uid://5aed1evjwe4q" path="res://Entities/Player/Item/Shotgun Shells.tscn" id="15_l80rc"]
+[ext_resource type="PackedScene" uid="uid://crre3vai78iqs" path="res://Entities/Weapons/Guns/UMP/UMP.tscn" id="16_5m37j"]
+[ext_resource type="PackedScene" uid="uid://dowbolfl2jkqb" path="res://Menu&UI/Menu/Crafting&UpgradingMenu/CraftingTable.tscn" id="17_hl213"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ww0jn"]
-radius = 7.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_x44r4"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_761t5"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hacra"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jynvv"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmeus"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_061yh"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw7o4"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gallu"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_samso"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl213"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m37j"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e34i1"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_761t5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x44r4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_761t5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hacra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jynvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmeus")
+}],
+"loop": false,
+"name": &"dying",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_061yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw7o4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gallu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_samso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hl213")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m37j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e34i1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hacra"]
+size = Vector2(11, 7)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+y_sort_enabled = true
+motion_mode = 1
 script = ExtResource("1_e5kic")
 speed = 100.0
+weapons = Dictionary[String, PackedScene]({
+"Luger P08": ExtResource("2_ww0jn")
+})
 
-[node name="FiniteStateMachine" type="Node" parent="."]
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_vweq0")
+initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://ds6620frtokf3"
 
-[node name="__TODO__" type="Node" parent="FiniteStateMachine"]
+[node name="Idle" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("3_t38ms")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -8.0
-offset_top = -17.0
-offset_right = 8.0
-offset_bottom = 15.0
+[node name="Walk" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("4_hj1c0")
+
+[node name="Dying" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("5_x44r4")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_761t5")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="Body" type="Node2D" parent="."]
 
 [node name="Hand" type="Node2D" parent="Body"]
 unique_name_in_owner = true
 position = Vector2(11, 0)
-
-[node name="LugerP08" parent="Body/Hand" instance=ExtResource("2_ww0jn")]
+script = ExtResource("7_761t5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
-shape = SubResource("CircleShape2D_ww0jn")
+visible = false
+position = Vector2(0.5, 5.5)
+shape = SubResource("RectangleShape2D_hacra")
 
 [node name="Camera2D" parent="." instance=ExtResource("4_1des2")]
+
+[node name="Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+
+[node name="Stock" type="VBoxContainer" parent="Screen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -48.0
+offset_right = 21.0
+offset_bottom = 48.0
+grow_vertical = 2
+theme = ExtResource("11_uw7o4")
+script = ExtResource("12_061yh")
+
+[node name="Blood" parent="Screen/Stock" instance=ExtResource("12_vcmon")]
+layout_mode = 2
+stock = 100
+
+[node name="Midkit" parent="Screen/Stock" instance=ExtResource("13_h6pxy")]
+layout_mode = 2
+
+[node name="Pistol Bullets" parent="Screen/Stock" instance=ExtResource("13_061yh")]
+layout_mode = 2
+
+[node name="Shotgun Shells" parent="Screen/Stock" instance=ExtResource("15_l80rc")]
+layout_mode = 2
+
+[node name="SMG Bullets" parent="Screen/Stock" instance=ExtResource("13_5m37j")]
+layout_mode = 2
+
+[node name="Slots" type="HBoxContainer" parent="Screen" node_paths=PackedStringArray("hand")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("13_gallu")
+hand = NodePath("../../Body/Hand")
+fade_timer = 3.0
+duration = 0.5
+
+[node name="Slot" parent="Screen/Slots" instance=ExtResource("13_uw7o4")]
+layout_mode = 2
+object = ExtResource("2_ww0jn")
+
+[node name="Slot2" parent="Screen/Slots" instance=ExtResource("13_uw7o4")]
+layout_mode = 2
+object = ExtResource("16_5m37j")
+
+[node name="CraftingTable" parent="." instance=ExtResource("17_hl213")]
+
+[connection signal="animation_finished" from="Animations" to="FiniteStateMachine/Dying" method="_on_animations_animation_finished"]

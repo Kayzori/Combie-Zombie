@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://wqlcr52hgxyw"]
+
+[ext_resource type="Script" uid="uid://uyhhl5ar2lfb" path="res://Root/SFXManager/SFXManager.gd" id="1_qtgve"]
+[ext_resource type="AudioStream" uid="uid://c0ul484op50pn" path="res://Root/SFXManager/SFX/Weapons/Pistol.wav" id="2_4dc76"]
+[ext_resource type="AudioStream" uid="uid://xopu2tb6ifd1" path="res://Root/SFXManager/SFX/Weapons/Pistol_Reload.wav" id="3_k032y"]
+[ext_resource type="AudioStream" uid="uid://c2uhwridfupdq" path="res://Root/SFXManager/SFX/Weapons/SMG.wav" id="4_ia3ea"]
+[ext_resource type="AudioStream" uid="uid://txutl5okv8gk" path="res://Root/SFXManager/SFX/Player/Walk.wav" id="4_vd5r5"]
+[ext_resource type="AudioStream" uid="uid://h4k507ro2d11" path="res://Root/SFXManager/SFX/Weapons/SMG_Reload.wav" id="5_ia3ea"]
+
+[node name="SFXManager" type="Node"]
+script = ExtResource("1_qtgve")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Weapon" type="Node" parent="SFX"]
+
+[node name="Pistol" type="AudioStreamPlayer" parent="SFX/Weapon"]
+stream = ExtResource("2_4dc76")
+
+[node name="Pistol_Reload" type="AudioStreamPlayer" parent="SFX/Weapon"]
+stream = ExtResource("3_k032y")
+
+[node name="SMG" type="AudioStreamPlayer" parent="SFX/Weapon"]
+stream = ExtResource("4_ia3ea")
+
+[node name="SMG_Reload" type="AudioStreamPlayer" parent="SFX/Weapon"]
+stream = ExtResource("5_ia3ea")
+volume_db = 5.0
+
+[node name="Player" type="Node" parent="SFX"]
+
+[node name="Walk" type="AudioStreamPlayer" parent="SFX/Player"]
+stream = ExtResource("4_vd5r5")
+pitch_scale = 1.5
+
+[node name="InstanceHolder" type="Node" parent="."]

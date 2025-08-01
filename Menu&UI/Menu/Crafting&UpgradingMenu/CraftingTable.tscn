@@ -1,0 +1,142 @@
+[gd_scene load_steps=14 format=3 uid="uid://dowbolfl2jkqb"]
+
+[ext_resource type="Theme" uid="uid://qicbns858sa7" path="res://Menu&UI/Theme/CraftingTable/CraftingTable.tres" id="1_xc4b6"]
+[ext_resource type="Texture2D" uid="uid://df8hidxi5xfy3" path="res://Menu&UI/Theme/CraftingTable/Buttons/UpgradeButton.png" id="2_t4yqt"]
+[ext_resource type="Script" uid="uid://4rt433obnlg4" path="res://Menu&UI/Menu/Crafting&UpgradingMenu/CraftingTable.gd" id="3_1oh77"]
+[ext_resource type="Texture2D" uid="uid://bbg62glr52y24" path="res://Menu&UI/Theme/CraftingTable/Buttons/CraftButton.png" id="4_1oh77"]
+[ext_resource type="PackedScene" uid="uid://byewhoyfiiwq0" path="res://Menu&UI/Menu/Crafting&UpgradingMenu/CraftingRecipe/CraftingRecipe.tscn" id="5_tlepi"]
+[ext_resource type="Script" uid="uid://dekp5wv8yamy4" path="res://Menu&UI/Menu/Crafting&UpgradingMenu/CraftingRecipe/CraftingTag.gd" id="6_yqpku"]
+[ext_resource type="Texture2D" uid="uid://bo3ukp7u614v7" path="res://Entities/Player/Item/Art/PistolBullets.png" id="7_f0oyw"]
+[ext_resource type="Texture2D" uid="uid://dxd5cqi8hhdim" path="res://Entities/Player/Item/Art/BloodJar.png" id="8_4bveo"]
+[ext_resource type="Texture2D" uid="uid://dhkwoehudb501" path="res://Entities/Player/Item/Art/SMGBullets.png" id="9_j3b84"]
+[ext_resource type="Texture2D" uid="uid://cdqr48dxheys2" path="res://Menu&UI/Theme/CraftingTable/Buttons/ReturnButton.png" id="10_l027n"]
+
+[sub_resource type="Resource" id="Resource_f0oyw"]
+script = ExtResource("6_yqpku")
+spending_icon = ExtResource("8_4bveo")
+spend_item_name = "Blood"
+spending = 2
+earning_icon = ExtResource("7_f0oyw")
+earn_item_name = "Pistol Bullets"
+earning = 5
+metadata/_custom_type_script = "uid://dekp5wv8yamy4"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l027n"]
+load_path = "res://.godot/imported/BloodJar.png-35cbca7c8e69214300f2a94a0bc56a6e.ctex"
+
+[sub_resource type="Resource" id="Resource_uieqo"]
+script = ExtResource("6_yqpku")
+spending_icon = SubResource("CompressedTexture2D_l027n")
+spend_item_name = "Blood"
+spending = 7
+earning_icon = ExtResource("9_j3b84")
+earn_item_name = "SMG Bullets"
+earning = 30
+metadata/_custom_type_script = "uid://dekp5wv8yamy4"
+
+[node name="CraftingTable" type="Control"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xc4b6")
+script = ExtResource("3_1oh77")
+
+[node name="Main" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = -31.0
+offset_right = 54.5
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Main/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Upgrade"
+horizontal_alignment = 1
+
+[node name="UpgradeMenu" type="TextureButton" parent="Main/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_t4yqt")
+texture_pressed = ExtResource("2_t4yqt")
+texture_hover = ExtResource("2_t4yqt")
+stretch_mode = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Main/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Main/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Craft"
+horizontal_alignment = 1
+
+[node name="CarftMenu" type="TextureButton" parent="Main/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("4_1oh77")
+texture_pressed = ExtResource("4_1oh77")
+texture_hover = ExtResource("4_1oh77")
+stretch_mode = 5
+
+[node name="MainMenuReturn" type="TextureButton" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("10_l027n")
+
+[node name="Craft" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -60.0
+offset_right = 138.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Craft"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Craft/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="CraftingTag" parent="Craft/VBoxContainer/GridContainer" instance=ExtResource("5_tlepi")]
+layout_mode = 2
+tag = SubResource("Resource_f0oyw")
+
+[node name="CraftingTag2" parent="Craft/VBoxContainer/GridContainer" instance=ExtResource("5_tlepi")]
+layout_mode = 2
+tag = SubResource("Resource_uieqo")
+
+[node name="CraftMenuReturn" type="TextureButton" parent="Craft/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("10_l027n")
+
+[connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/VBoxContainer2/CarftMenu" to="." method="_on_carft_menu_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/MainMenuReturn" to="." method="_on_main_menu_return_pressed"]
+[connection signal="pressed" from="Craft/VBoxContainer/CraftMenuReturn" to="." method="_on_craft_menu_return_pressed"]

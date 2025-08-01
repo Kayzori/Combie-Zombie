@@ -1,37 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://bri7nwvuii66p"]
+[gd_scene load_steps=6 format=3 uid="uid://bri7nwvuii66p"]
 
-[ext_resource type="Texture2D" uid="uid://cutepvcnu4dxl" path="res://World/Asset/HouseParts.png" id="1_y6flb"]
 [ext_resource type="PackedScene" uid="uid://b213w1n2e4et" path="res://Entities/Player/Player.tscn" id="2_mlekv"]
-[ext_resource type="PackedScene" uid="uid://daueweaqpcnky" path="res://Menu&UI/Camera.tscn" id="3_mlekv"]
+[ext_resource type="Texture2D" uid="uid://dvx2hoj00tmk4" path="res://World/Tilemap/Art/Tiles.png" id="2_y6flb"]
+[ext_resource type="PackedScene" uid="uid://chuvmc4ap4j7u" path="res://World/Objects/CompingCar.tscn" id="3_mlekv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mlekv"]
+texture = ExtResource("2_y6flb")
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 2, 8, 2, 8, 6, 3, 6, 3, 8, -3, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 6, 8, 6, 8, 2, -8, 2)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, 2, -8, 2, -8, 6, -3, 6, -3, 8, 3, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 8, 3, 8, 3, -8, -3, -8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 6, 8, 6, 8, 2, 3, 2, 3, -8, -3, -8)
+4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, 6, -8, 6, -8, 2, -3, 2, -3, -8, 3, -8)
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 8, 9, 8, 9, -5, -10, -5)
+
+[sub_resource type="TileSet" id="TileSet_il6x7"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_mlekv")
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
-[node name="House" type="Node2D" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_il6x7")
 
-[node name="Sprite2D" type="Sprite2D" parent="House"]
-position = Vector2(0, -82.5)
-texture = ExtResource("1_y6flb")
-region_enabled = true
-region_rect = Rect2(88, 387, 384, 165)
+[node name="Player" parent="." instance=ExtResource("2_mlekv")]
 
-[node name="Sprite2D2" type="Sprite2D" parent="House"]
-texture = ExtResource("1_y6flb")
-region_enabled = true
-region_rect = Rect2(96, 64, 368, 256)
-
-[node name="Player" parent="House" instance=ExtResource("2_mlekv")]
-
-[node name="Sprite2D3" type="Sprite2D" parent="House"]
-modulate = Color(1, 1, 1, 0.666667)
-position = Vector2(0, -14)
-texture = ExtResource("1_y6flb")
-region_enabled = true
-region_rect = Rect2(88, 752, 384, 294)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(-71.9394, -0.890926)
-polygon = PackedVector2Array(-112.061, 128.891, 255.939, 128.891, 255.939, -128.109, -0.0606232, -127.109, -0.0606232, 0.890926, -112.061, 0.890926, -112.061, 128.891, -120.061, 133.891, -120.061, -5.10907, -8.06062, -5.10907, -8.06062, -133.109, 263.939, -132.109, 263.939, 133.891, -120.061, 133.891)
-
-[node name="Camera2D" parent="." instance=ExtResource("3_mlekv")]
+[node name="CompingCar" parent="." instance=ExtResource("3_mlekv")]
+position = Vector2(-26, -24)

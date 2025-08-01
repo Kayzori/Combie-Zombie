@@ -1,10 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://jahsy1s2jhcd"]
 
 [ext_resource type="Script" uid="uid://bf7wk1n1ros7u" path="res://Entities/Weapons/Ammo/Bullet/Bullet.gd" id="1_b3kqw"]
-[ext_resource type="Texture2D" uid="uid://crl4wq0dq8s0s" path="res://Entities/Weapons/Asset/Guns.png" id="1_blds8"]
+[ext_resource type="Texture2D" uid="uid://crl4wq0dq8s0s" path="res://Entities/Weapons/Art/Guns.png" id="1_blds8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3kqw"]
-size = Vector2(6, 5)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_a7h7y"]
+resource_local_to_scene = true
+a = Vector2(-2, 0)
+b = Vector2(2, 0)
 
 [node name="Bullet" type="Node2D"]
 z_index = 10
@@ -21,6 +23,6 @@ region_rect = Rect2(39, 22, 4, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_b3kqw")
+shape = SubResource("SegmentShape2D_a7h7y")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
