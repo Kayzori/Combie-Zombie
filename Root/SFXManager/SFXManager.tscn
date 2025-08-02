@@ -31,6 +31,7 @@ volume_db = 5.0
 
 [node name="Walk" type="AudioStreamPlayer" parent="SFX/Player"]
 stream = ExtResource("4_vd5r5")
-pitch_scale = 1.5
+volume_db = -20.0
+pitch_scale = 2.0
 
 [node name="InstanceHolder" type="Node" parent="."]

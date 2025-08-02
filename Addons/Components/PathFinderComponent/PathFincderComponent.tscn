@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://da7syc7fdhwq3"]
+
+[ext_resource type="Script" uid="uid://dq2waya77ht4f" path="res://Addons/Components/PathFinderComponent/PathFinderComponent.gd" id="1_2uose"]
+
+[node name="PathFinderComponent" type="Node2D"]
+script = ExtResource("1_2uose")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 32)
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+rotation = 0.785398
+target_position = Vector2(0, 32)
+
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+rotation = 1.5708
+target_position = Vector2(0, 32)
+
+[node name="RayCast2D4" type="RayCast2D" parent="."]
+rotation = 2.35619
+target_position = Vector2(0, 32)
+
+[node name="RayCast2D5" type="RayCast2D" parent="."]
+rotation = 3.14159
+target_position = Vector2(0, 32)
+
+[node name="RayCast2D6" type="RayCast2D" parent="."]
+rotation = 3.92699
+target_position = Vector2(0, 32)
+
+[node name="RayCast2D7" type="RayCast2D" parent="."]
+rotation = 4.71239
+target_position = Vector2(0, 32)
+
+[node name="RayCast2D8" type="RayCast2D" parent="."]
+rotation = 5.49779
+target_position = Vector2(0, 32)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true

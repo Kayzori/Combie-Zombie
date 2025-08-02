@@ -1,37 +1,28 @@
 @tool
 extends PanelContainer
+class_name CraftingRecipe
 
-@export var tag: CraftingTag
-
-var stock: Stock
-var spend_item: Item
-var earn_item: Item
+@export var crafting_tag: CraftingTag
 
 func _ready() -> void:
-    if Engine.is_editor_hint():
+    if !crafting_tag:
         return
-    if tag:
-        if tag.spending_icon: $HBoxContainer/SpendItem.texture = tag.spending_icon
-        $HBoxContainer/Spending.text = "x " + str(tag.spending)
-        if tag.earning_icon: $HBoxContainer/EarnItem.texture = tag.earning_icon
-        $HBoxContainer/Earning.text = "x " + str(tag.earning)
-    stock = GameManager.player.stock
-    spend_item = stock.get_item(tag.spend_item_name)
-    earn_item = stock.get_item(tag.earn_item_name)
+    if crafting_tag.spend_item_tag:
+        $HBoxContainer/SpendItem.texture = crafting_tag.spend_item_tag.icon
+        $HBoxContainer/Spending.text = "x " + str(crafting_tag.spending)
+    if crafting_tag.earn_item_tag:
+        $HBoxContainer/EarnItem.texture = crafting_tag.earn_item_tag.icon
+        $HBoxContainer/Earning.text = "x " + str(crafting_tag.earning)
 
 func _process(_delta: float) -> void:
-    if Engine.is_editor_hint():
-        if tag:
-            if tag.spending_icon: $HBoxContainer/SpendItem.texture = tag.spending_icon
-            $HBoxContainer/Spending.text = "x " + str(tag.spending)
-            if tag.earning_icon: $HBoxContainer/EarnItem.texture = tag.earning_icon
-            $HBoxContainer/Earning.text = "x " + str(tag.earning)
-        return
-    visible = spend_item and spend_item.stock >= tag.spending
+    if !crafting_tag or Engine.is_editor_hint(): return
+    visible = crafting_tag.spend_item_tag and\
+    crafting_tag.spend_item_tag.stock >= crafting_tag.spending and\
+    GameManager.player.slots.slot_objects.has(crafting_tag.weapon_needed)
 
 func _on_texture_button_pressed() -> void:
-    if Engine.is_editor_hint():
-        return
-    spend_item.stock -= tag.spending
-    if earn_item: earn_item.stock += tag.earning
-    visible = spend_item.stock < tag.spending
+    if Engine.is_editor_hint() or !crafting_tag: return
+    crafting_tag.spend_item_tag.stock -= crafting_tag.spending
+    if crafting_tag.earn_item_tag:
+        crafting_tag.earn_item_tag.stock += crafting_tag.earning
+    visible = crafting_tag.earn_item_tag.stock < crafting_tag.spending

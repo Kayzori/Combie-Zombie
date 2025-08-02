@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsdd7v8dlbtyj"]
-
-[ext_resource type="PackedScene" uid="uid://cocs3uhwkb2ao" path="res://Entities/Player/Item/ItemClass/Item.tscn" id="1_lk0ta"]
-
-[node name="Tool Pieces" instance=ExtResource("1_lk0ta")]
-item_name = "Tool Pieces"

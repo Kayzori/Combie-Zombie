@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://jahsy1s2jhcd"]
+
+[ext_resource type="Script" uid="uid://bf7wk1n1ros7u" path="res://Entities/Objects/Ammo/Bullet/Bullet.gd" id="1_b3kqw"]
+[ext_resource type="Texture2D" uid="uid://crl4wq0dq8s0s" path="res://Entities/Objects/Ammo/Bullet/Art/Guns.png" id="1_blds8"]
+[ext_resource type="Script" uid="uid://npo63kk8lnhb" path="res://Addons/Components/HitBoxComponent/HitBoxComponent.gd" id="3_6p5fr"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_a7h7y"]
+resource_local_to_scene = true
+a = Vector2(-4, -0.5)
+b = Vector2(0, -0.5)
+
+[node name="Bullet" type="Node2D"]
+z_index = 10
+y_sort_enabled = true
+script = ExtResource("1_b3kqw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -1)
+texture = ExtResource("1_blds8")
+centered = false
+region_rect = Rect2(39, 22, 4, 3)
+
+[node name="HitBoxComponent" type="Area2D" parent="."]
+collision_mask = 5
+script = ExtResource("3_6p5fr")
+target_group = "Zombie"
+metadata/_custom_type_script = "uid://npo63kk8lnhb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(2, 1)
+shape = SubResource("SegmentShape2D_a7h7y")
+debug_color = Color(1, 1, 1, 0.42)
+
+[connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
+[connection signal="body_entered" from="HitBoxComponent" to="." method="_on_area_2d_body_entered"]

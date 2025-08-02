@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://blgqlxfx8wbjk"]
+
+[ext_resource type="PackedScene" uid="uid://4lva68r8lx51" path="res://Entities/Objects/WeaponClassNode/Weapon.tscn" id="1_vcb1f"]
+[ext_resource type="Resource" uid="uid://bn0xw37d3bjeq" path="res://Entities/Objects/Guns/Riffle/Riffle.res" id="2_lwgmr"]
+[ext_resource type="Texture2D" uid="uid://c6tktmflrg3ra" path="res://Entities/Objects/Guns/Riffle/Art/Riffle.png" id="6_kdlbx"]
+
+[node name="Weapon" instance=ExtResource("1_vcb1f")]
+specs = ExtResource("2_lwgmr")
+slot_image = ExtResource("6_kdlbx")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-1, 2)
+texture = ExtResource("6_kdlbx")
+
+[node name="Hand" parent="." index="1"]
+position = Vector2(-10, 2)
+
+[node name="Hole" parent="." index="2"]
+position = Vector2(14, -1)

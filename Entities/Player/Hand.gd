@@ -5,6 +5,10 @@ class_name Hand
 var is_empty: bool = true
 var object_held: Node2D = null
 
+func _process(_delta: float) -> void:
+    if owner.is_dead:
+        queue_free()
+
 func hold(object: Node2D) -> Node2D:
     var was_held: Node2D = drop()
     add_child(object)

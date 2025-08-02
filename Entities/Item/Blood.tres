@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemTag" load_steps=3 format=3 uid="uid://dvt7aih05k4u3"]
+
+[ext_resource type="Texture2D" uid="uid://dxd5cqi8hhdim" path="res://Entities/Item/Art/Blood.png" id="1_m1rjo"]
+[ext_resource type="Script" uid="uid://bt7gtjwqnyy1" path="res://Entities/Item/ItemClass/ItemTag.gd" id="2_8ague"]
+
+[resource]
+script = ExtResource("2_8ague")
+icon = ExtResource("1_m1rjo")
+name = "Blood"
+stock = 0
+metadata/_custom_type_script = "uid://bt7gtjwqnyy1"

@@ -1,0 +1,228 @@
+[gd_scene load_steps=33 format=3 uid="uid://b213w1n2e4et"]
+
+[ext_resource type="Script" uid="uid://c6i548v742bvc" path="res://Entities/Player/Player.gd" id="1_e5kic"]
+[ext_resource type="Script" uid="uid://ds6620frtokf3" path="res://Addons/Components/FiniteStateMachine/FiniteStateMachine.gd" id="2_vweq0"]
+[ext_resource type="PackedScene" uid="uid://do1s2hyuhm3fu" path="res://Entities/Weapons/Guns/Luger P08/Luger P08.tscn" id="2_ww0jn"]
+[ext_resource type="Script" uid="uid://c6rkq14c2j5qi" path="res://Entities/Player/States/Idle.gd" id="3_t38ms"]
+[ext_resource type="Script" uid="uid://cmxgkjity3ay4" path="res://Entities/Player/States/Walk.gd" id="4_hj1c0"]
+[ext_resource type="Texture2D" uid="uid://chun0i2860fkw" path="res://Entities/Player/Art/SpriteSheet.png" id="5_an6q6"]
+[ext_resource type="Script" uid="uid://bu1883m17f8gy" path="res://Entities/Player/States/Dying.gd" id="5_x44r4"]
+[ext_resource type="Script" uid="uid://drsfbum0gldl" path="res://Entities/Player/Hand.gd" id="7_761t5"]
+[ext_resource type="Script" uid="uid://cbu60tfm2syrc" path="res://Addons/Components/RunTimer/RunTimer.gd" id="9_5m37j"]
+[ext_resource type="PackedScene" uid="uid://b3h7bv8kehm21" path="res://Entities/Item/ItemClass/ItemManager.tscn" id="10_uw7o4"]
+[ext_resource type="Resource" uid="uid://dvt7aih05k4u3" path="res://Entities/Item/Blood.tres" id="12_hl213"]
+[ext_resource type="PackedScene" uid="uid://cocs3uhwkb2ao" path="res://Entities/Item/ItemClass/Item.tscn" id="12_samso"]
+[ext_resource type="Resource" uid="uid://4kmvdp53tp5g" path="res://Entities/Item/Pistol Bullets.tres" id="13_5m37j"]
+[ext_resource type="Script" uid="uid://dgpivxwnmp14i" path="res://Entities/Player/SlotContainer.gd" id="13_gallu"]
+[ext_resource type="PackedScene" uid="uid://cg8tgvv8udnpb" path="res://Entities/Player/Slot/Slot.tscn" id="13_uw7o4"]
+[ext_resource type="Resource" uid="uid://c2nn6l67ds6kd" path="res://Entities/Item/SMG Bullets.tres" id="14_5m37j"]
+[ext_resource type="PackedScene" uid="uid://crre3vai78iqs" path="res://Entities/Weapons/Guns/UMP/UMP.tscn" id="16_5m37j"]
+[ext_resource type="PackedScene" uid="uid://dowbolfl2jkqb" path="res://Menu&UI/Menu/Crafting&UpgradingMenu/CraftingTable.tscn" id="17_hl213"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x44r4"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_761t5"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hacra"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jynvv"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmeus"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_061yh"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw7o4"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gallu"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_samso"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl213"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m37j"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e34i1"]
+atlas = ExtResource("5_an6q6")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_761t5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x44r4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_761t5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hacra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jynvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmeus")
+}],
+"loop": false,
+"name": &"dying",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_061yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw7o4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gallu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_samso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hl213")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m37j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e34i1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hacra"]
+size = Vector2(11, 7.5)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_e5kic")
+speed = 100.0
+weapons = Dictionary[String, PackedScene]({
+"Luger P08": ExtResource("2_ww0jn")
+})
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_vweq0")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://ds6620frtokf3"
+
+[node name="Idle" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("3_t38ms")
+
+[node name="Walk" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("4_hj1c0")
+
+[node name="Dying" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("5_x44r4")
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_761t5")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2(0, -2)
+
+[node name="Hand" type="Node2D" parent="Body"]
+unique_name_in_owner = true
+position = Vector2(11, 0)
+script = ExtResource("7_761t5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1.25)
+shape = SubResource("RectangleShape2D_hacra")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RunTimer" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_5m37j")
+run_duration = 3.0
+
+[node name="Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -160.0
+offset_top = -90.0
+offset_right = 160.0
+offset_bottom = 90.0
+
+[node name="Stock" parent="Screen" instance=ExtResource("10_uw7o4")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_right = 34.0
+
+[node name="Item" parent="Screen/Stock" instance=ExtResource("12_samso")]
+visible = true
+layout_mode = 2
+tag = ExtResource("12_hl213")
+
+[node name="Item2" parent="Screen/Stock" instance=ExtResource("12_samso")]
+layout_mode = 2
+tag = ExtResource("13_5m37j")
+visible_when_stock = true
+
+[node name="Item3" parent="Screen/Stock" instance=ExtResource("12_samso")]
+layout_mode = 2
+tag = ExtResource("14_5m37j")
+visible_when_stock = true
+
+[node name="Slots" type="HBoxContainer" parent="Screen" node_paths=PackedStringArray("hand")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("13_gallu")
+hand = NodePath("../../Body/Hand")
+fade_timer = 3.0
+duration = 0.5
+
+[node name="Slot" parent="Screen/Slots" instance=ExtResource("13_uw7o4")]
+layout_mode = 2
+object = ExtResource("2_ww0jn")
+
+[node name="Slot2" parent="Screen/Slots" instance=ExtResource("13_uw7o4")]
+layout_mode = 2
+object = ExtResource("16_5m37j")
+
+[node name="CraftingTable" parent="." instance=ExtResource("17_hl213")]
+visible = false
