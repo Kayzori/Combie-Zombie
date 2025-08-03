@@ -1,12 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://dnpijec026p2p"]
+[gd_scene load_steps=27 format=3 uid="uid://dnpijec026p2p"]
 
 [ext_resource type="Script" uid="uid://b70i7r1nnjm13" path="res://Entities/Zombie/Zombie.gd" id="1_4b1i2"]
 [ext_resource type="PackedScene" uid="uid://da7syc7fdhwq3" path="res://Addons/Components/PathFinderComponent/PathFincderComponent.tscn" id="2_4wn1m"]
-[ext_resource type="PackedScene" uid="uid://duewu5xctwvlg" path="res://Entities/Collectable/Blood.tscn" id="2_r5buq"]
+[ext_resource type="Resource" uid="uid://dtm13sunok1ce" path="res://Resources/Entities/Zombie/ZombieLevel1.res" id="2_pyucq"]
+[ext_resource type="PackedScene" uid="uid://duewu5xctwvlg" path="res://Menu&UI/InventorySystem/Collectable/Blood.tscn" id="2_r5buq"]
 [ext_resource type="Script" uid="uid://ds6620frtokf3" path="res://Addons/Components/FiniteStateMachine/FiniteStateMachine.gd" id="2_sdyfu"]
 [ext_resource type="Script" uid="uid://c4a2wfu7qsk34" path="res://Entities/Zombie/States/Chase.gd" id="3_7pdfo"]
-[ext_resource type="Script" uid="uid://demntsi2xkgw2" path="res://Entities/Zombie/States/Idle.gd" id="4_r0xot"]
-[ext_resource type="Script" uid="uid://bs087e4123r80" path="res://Addons/Components/HealthComponent/HealthComponent.gd" id="5_isaqo"]
+[ext_resource type="Script" uid="uid://demntsi2xkgw2" path="res://Entities/Zombie/States/Attack.gd" id="4_r0xot"]
+[ext_resource type="Script" uid="uid://bs087e4123r80" path="res://Addons/Components/HealthBarComponent/HealthComponent.gd" id="5_isaqo"]
 [ext_resource type="Texture2D" uid="uid://c8fplktutfyl7" path="res://Menu&UI/Theme/Player/Bars.png" id="6_fxjvy"]
 [ext_resource type="Texture2D" uid="uid://bmk6kgvspljec" path="res://Entities/Zombie/Art/Zombie.png" id="6_huptp"]
 [ext_resource type="Script" uid="uid://ckasfn4gq87kq" path="res://Addons/Components/HurtBoxComponent/HurtboxComponent.gd" id="6_r6810"]
@@ -96,7 +97,7 @@ region = Rect2(33, 8, 30, 4)
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fxjvy"]
-radius = 8.0
+radius = 9.0
 
 [node name="Zombie" type="CharacterBody2D" groups=["Zombie"]]
 z_as_relative = false
@@ -106,8 +107,8 @@ collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_4b1i2")
+stats = ExtResource("2_pyucq")
 drop_scene = ExtResource("2_r5buq")
-speed = 80.0
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_sdyfu")
@@ -116,15 +117,14 @@ metadata/_custom_type_script = "uid://ds6620frtokf3"
 
 [node name="Chasing" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("3_7pdfo")
-steering_force = 50.0
 
 [node name="Attacking" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("4_r0xot")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fe0gu")
 animation = &"chase"
-frame_progress = 0.0227652
+frame_progress = 0.642007
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -138,13 +138,12 @@ position = Vector2(0, 7)
 [node name="HealthComponent" type="TextureProgressBar" parent="."]
 physics_interpolation_mode = 0
 offset_left = -15.0
-offset_top = -18.0
+offset_top = -17.0
 offset_right = 15.0
-offset_bottom = -14.0
+offset_bottom = -13.0
 texture_under = SubResource("AtlasTexture_r5buq")
 texture_progress = SubResource("AtlasTexture_huptp")
 script = ExtResource("5_isaqo")
-max_health = 90
 visible_time = 3.0
 metadata/_custom_type_script = "uid://bs087e4123r80"
 
@@ -172,6 +171,8 @@ position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_fxjvy")
 debug_color = Color(1, 1, 1, 0.42)
 
+[connection signal="frame_changed" from="Animations" to="FiniteStateMachine/Chasing" method="_on_animations_frame_changed"]
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="body_entered" from="HitBoxComponent" to="FiniteStateMachine/Chasing" method="_on_hit_box_component_body_entered"]
 [connection signal="body_exited" from="HitBoxComponent" to="FiniteStateMachine/Attacking" method="_on_hit_box_component_body_exited"]

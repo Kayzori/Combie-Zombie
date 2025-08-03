@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8op8falr2few"]
+
+[ext_resource type="Script" uid="uid://c7pakc0yc74so" path="res://Menu&UI/Theme/Cursor/Cursor.gd" id="1_4ig1k"]
+[ext_resource type="Texture2D" uid="uid://ybh5ebvr7kyy" path="res://Menu&UI/Theme/Cursor/Cursor.png" id="1_8khil"]
+
+[node name="Cursor" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_4ig1k")
+
+[node name="Normal" type="Sprite2D" parent="."]
+texture = ExtResource("1_8khil")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Click" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_8khil")
+region_enabled = true
+region_rect = Rect2(18, 2, 12, 12)

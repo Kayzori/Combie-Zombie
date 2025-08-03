@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemTag" load_steps=3 format=3 uid="uid://dstnunew2ti5d"]
+
+[ext_resource type="Texture2D" uid="uid://hxrgkknxha56" path="res://Resources/Items/Art/Midkit.png" id="1_6pfvj"]
+[ext_resource type="Script" uid="uid://bt7gtjwqnyy1" path="res://Menu&UI/InventorySystem/Item/ItemClassNode/ItemTag.gd" id="2_itn4u"]
+
+[resource]
+script = ExtResource("2_itn4u")
+icon = ExtResource("1_6pfvj")
+name = "Medkit"
+stock = 0
+metadata/_custom_type_script = "uid://bt7gtjwqnyy1"

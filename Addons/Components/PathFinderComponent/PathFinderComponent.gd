@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 
 
 func set_path() -> void:
-    var player_dir : Vector2 = global_position.direction_to( GameManager.player.global_position )
+    var player_dir : Vector2 = global_position.direction_to(GameManager.player.global_position) if GameManager.player else Vector2.ZERO
     for i in 8:
         obstacles[ i ] = 0
         outcomes[ i ] = 0

@@ -15,11 +15,11 @@ func _enter_tree() -> void:
     unhelded = false
 
 func _process(delta: float) -> void:
-    if disable or GameManager.player.is_crafting or GameManager.player.is_dying:
+    if disable or GameManager.player.is_shoping:
         return
     if Input.is_action_just_pressed("Reload") and !is_reloading and specs.magazine < specs.capacity:
         specs.stock_item.stock = await reload(specs.stock_item.stock)
-    if Input.is_action_pressed("Shoot") and can_shot and !is_reloading:
+    if Input.is_action_pressed("Shot") and can_shot and !is_reloading:
         if specs.magazine <= 0:
             specs.stock_item.stock = await reload(specs.stock_item.stock)
         else:

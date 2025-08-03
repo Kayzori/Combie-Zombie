@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemTag" load_steps=3 format=3 uid="uid://4kmvdp53tp5g"]
+
+[ext_resource type="Texture2D" uid="uid://bo3ukp7u614v7" path="res://Resources/Items/Art/Pistol Bullets.png" id="1_rwgbu"]
+[ext_resource type="Script" uid="uid://bt7gtjwqnyy1" path="res://Menu&UI/InventorySystem/Item/ItemClassNode/ItemTag.gd" id="2_8b6pi"]
+
+[resource]
+script = ExtResource("2_8b6pi")
+icon = ExtResource("1_rwgbu")
+name = "Pistol Bullets"
+stock = 0
+metadata/_custom_type_script = "uid://bt7gtjwqnyy1"

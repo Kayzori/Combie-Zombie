@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemTag" load_steps=3 format=3 uid="uid://c2nn6l67ds6kd"]
+
+[ext_resource type="Texture2D" uid="uid://dhkwoehudb501" path="res://Resources/Items/Art/SMG Bullets.png" id="1_bg358"]
+[ext_resource type="Script" uid="uid://bt7gtjwqnyy1" path="res://Menu&UI/InventorySystem/Item/ItemClassNode/ItemTag.gd" id="2_tb7er"]
+
+[resource]
+script = ExtResource("2_tb7er")
+icon = ExtResource("1_bg358")
+name = "SMG Bullets"
+stock = 0
+metadata/_custom_type_script = "uid://bt7gtjwqnyy1"

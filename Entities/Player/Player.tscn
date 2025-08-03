@@ -1,24 +1,26 @@
-[gd_scene load_steps=40 format=3 uid="uid://b213w1n2e4et"]
+[gd_scene load_steps=42 format=3 uid="uid://b213w1n2e4et"]
 
 [ext_resource type="Script" uid="uid://c6i548v742bvc" path="res://Entities/Player/Player.gd" id="1_e5kic"]
 [ext_resource type="Script" uid="uid://ds6620frtokf3" path="res://Addons/Components/FiniteStateMachine/FiniteStateMachine.gd" id="2_vweq0"]
-[ext_resource type="PackedScene" uid="uid://do1s2hyuhm3fu" path="res://Entities/Objects/Guns/Pistol/Pistol.tscn" id="2_ww0jn"]
 [ext_resource type="Script" uid="uid://c6rkq14c2j5qi" path="res://Entities/Player/States/Idle.gd" id="3_t38ms"]
 [ext_resource type="Script" uid="uid://cmxgkjity3ay4" path="res://Entities/Player/States/Walk.gd" id="4_hj1c0"]
 [ext_resource type="Texture2D" uid="uid://chun0i2860fkw" path="res://Entities/Player/Art/SpriteSheet.png" id="5_an6q6"]
 [ext_resource type="Script" uid="uid://bu1883m17f8gy" path="res://Entities/Player/States/Dying.gd" id="5_x44r4"]
 [ext_resource type="Script" uid="uid://drsfbum0gldl" path="res://Entities/Player/Hand.gd" id="7_761t5"]
-[ext_resource type="Script" uid="uid://cbu60tfm2syrc" path="res://Addons/Components/RunTimer/RunTimer.gd" id="9_5m37j"]
-[ext_resource type="Texture2D" uid="uid://d1m0i0p36bbkh" path="res://Menu&UI/Menu/Player/Bars.png" id="9_h6pxy"]
+[ext_resource type="Script" uid="uid://cbu60tfm2syrc" path="res://Addons/Components/StaminaBarComponent/StaminaBarComponent.gd" id="9_5m37j"]
+[ext_resource type="Texture2D" uid="uid://d1m0i0p36bbkh" path="res://Menu&UI/InventorySystem/Art/Bars.png" id="9_h6pxy"]
 [ext_resource type="Theme" uid="uid://qicbns858sa7" path="res://Menu&UI/Theme/CraftingTable/CraftingTable.tres" id="9_l80rc"]
-[ext_resource type="Script" uid="uid://dd0dp5spxo017" path="res://Entities/Item/ItemManager.gd" id="11_mgqku"]
-[ext_resource type="Resource" uid="uid://dvt7aih05k4u3" path="res://Entities/Item/Blood.tres" id="12_hl213"]
-[ext_resource type="PackedScene" uid="uid://cocs3uhwkb2ao" path="res://Entities/Item/ItemClass/Item.tscn" id="12_samso"]
-[ext_resource type="Resource" uid="uid://4kmvdp53tp5g" path="res://Entities/Item/Pistol Bullets.tres" id="13_5m37j"]
-[ext_resource type="Script" uid="uid://dgpivxwnmp14i" path="res://Entities/Slot/SlotManager.gd" id="13_gallu"]
-[ext_resource type="Resource" uid="uid://c2nn6l67ds6kd" path="res://Entities/Item/SMG Bullets.tres" id="14_5m37j"]
-[ext_resource type="PackedScene" uid="uid://bvdrqofcv26fd" path="res://Entities/Objects/Melees/Bat/Bat.tscn" id="19_h6pxy"]
-[ext_resource type="Script" uid="uid://bs087e4123r80" path="res://Addons/Components/HealthComponent/HealthComponent.gd" id="19_vcmon"]
+[ext_resource type="Script" uid="uid://dd0dp5spxo017" path="res://Menu&UI/InventorySystem/Item/ItemManager.gd" id="11_mgqku"]
+[ext_resource type="Resource" uid="uid://dstnunew2ti5d" path="res://Resources/Items/Medkit.tres" id="12_h6pxy"]
+[ext_resource type="Resource" uid="uid://dvt7aih05k4u3" path="res://Resources/Items/Blood.tres" id="12_hl213"]
+[ext_resource type="PackedScene" uid="uid://cocs3uhwkb2ao" path="res://Menu&UI/InventorySystem/Item/ItemClassNode/Item.tscn" id="12_samso"]
+[ext_resource type="Resource" uid="uid://4kmvdp53tp5g" path="res://Resources/Items/Pistol Bullets.tres" id="13_5m37j"]
+[ext_resource type="Script" uid="uid://dgpivxwnmp14i" path="res://Menu&UI/InventorySystem/Slot/SlotManager.gd" id="13_gallu"]
+[ext_resource type="Resource" uid="uid://c2nn6l67ds6kd" path="res://Resources/Items/SMG Bullets.tres" id="14_5m37j"]
+[ext_resource type="Resource" uid="uid://bcka2fpcpldnh" path="res://Resources/Items/Shotgun Shells.tres" id="15_h6pxy"]
+[ext_resource type="Resource" uid="uid://dc8h1mpf8kbef" path="res://Resources/Items/RiffleBullets.tres" id="15_l80rc"]
+[ext_resource type="PackedScene" uid="uid://bvdrqofcv26fd" path="res://Resources/Weapons/Melee/Bat.tscn" id="19_h6pxy"]
+[ext_resource type="Script" uid="uid://bs087e4123r80" path="res://Addons/Components/HealthBarComponent/HealthComponent.gd" id="19_vcmon"]
 [ext_resource type="Script" uid="uid://ckasfn4gq87kq" path="res://Addons/Components/HurtBoxComponent/HurtboxComponent.gd" id="20_h6pxy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x44r4"]
@@ -152,10 +154,8 @@ collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_e5kic")
-speed = 100.0
-weapons = Dictionary[String, PackedScene]({
-"Luger P08": ExtResource("2_ww0jn")
-})
+heal_item = ExtResource("12_h6pxy")
+heal_value = 100.0
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_vweq0")
@@ -192,6 +192,7 @@ position = Vector2(0.5, 1.25)
 shape = SubResource("RectangleShape2D_hacra")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+z_index = 1
 
 [node name="Screen" type="Control" parent="Camera2D"]
 layout_mode = 3
@@ -202,36 +203,47 @@ offset_right = 160.0
 offset_bottom = 90.0
 theme = ExtResource("9_l80rc")
 
-[node name="PanelContainer" type="PanelContainer" parent="Camera2D/Screen"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -16.0
-offset_right = 55.0
-grow_vertical = 0
-
-[node name="ItemManager" type="VBoxContainer" parent="Camera2D/Screen/PanelContainer"]
+[node name="ItemManager" type="VBoxContainer" parent="Camera2D/Screen"]
 layout_mode = 2
+offset_left = 6.0
+offset_top = 42.0
+offset_right = 45.0
+offset_bottom = 177.0
+alignment = 2
 script = ExtResource("11_mgqku")
 metadata/_custom_type_script = "uid://dd0dp5spxo017"
 
-[node name="Item" parent="Camera2D/Screen/PanelContainer/ItemManager" instance=ExtResource("12_samso")]
+[node name="Item5" parent="Camera2D/Screen/ItemManager" instance=ExtResource("12_samso")]
+visible = false
 layout_mode = 2
-tag = ExtResource("12_hl213")
-visible_when_stock = false
+tag = ExtResource("12_h6pxy")
 
-[node name="Item2" parent="Camera2D/Screen/PanelContainer/ItemManager" instance=ExtResource("12_samso")]
+[node name="Item2" parent="Camera2D/Screen/ItemManager" instance=ExtResource("12_samso")]
 visible = false
 layout_mode = 2
 tag = ExtResource("13_5m37j")
 
-[node name="Item3" parent="Camera2D/Screen/PanelContainer/ItemManager" instance=ExtResource("12_samso")]
+[node name="Item4" parent="Camera2D/Screen/ItemManager" instance=ExtResource("12_samso")]
+visible = false
+layout_mode = 2
+tag = ExtResource("15_h6pxy")
+
+[node name="Item3" parent="Camera2D/Screen/ItemManager" instance=ExtResource("12_samso")]
 visible = false
 layout_mode = 2
 tag = ExtResource("14_5m37j")
 
-[node name="RunTimer" type="TextureProgressBar" parent="Camera2D/Screen"]
+[node name="Item6" parent="Camera2D/Screen/ItemManager" instance=ExtResource("12_samso")]
+visible = false
+layout_mode = 2
+tag = ExtResource("15_l80rc")
+
+[node name="Item" parent="Camera2D/Screen/ItemManager" instance=ExtResource("12_samso")]
+layout_mode = 2
+tag = ExtResource("12_hl213")
+visible_when_stock = false
+
+[node name="StaminaBar" type="TextureProgressBar" parent="Camera2D/Screen" node_paths=PackedStringArray("character")]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 9.0
@@ -241,8 +253,10 @@ step = 0.01
 texture_under = SubResource("AtlasTexture_l80rc")
 texture_progress = SubResource("AtlasTexture_h6pxy")
 script = ExtResource("9_5m37j")
-run_duration = 10.0
-regeneration_duration = 5.0
+character = NodePath("../../..")
+regeneration_duration = 3.0
+base_speed = 80.0
+metadata/_custom_type_script = "uid://cbu60tfm2syrc"
 
 [node name="HealthComponent" type="TextureProgressBar" parent="Camera2D/Screen"]
 physics_interpolation_mode = 0
@@ -251,6 +265,7 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = 66.0
 offset_bottom = 9.0
+max_value = 300.0
 texture_under = SubResource("AtlasTexture_l2mqv")
 texture_progress = SubResource("AtlasTexture_mgqku")
 script = ExtResource("19_vcmon")
@@ -265,8 +280,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -53.0
-offset_top = -22.0
+offset_top = -25.0
 offset_right = 53.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
@@ -277,12 +293,25 @@ fade_timer = 3.0
 duration = 0.5
 metadata/_custom_type_script = "uid://dgpivxwnmp14i"
 
-[node name="Label" type="Label" parent="Camera2D/Screen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/Screen"]
 layout_mode = 0
-offset_left = 276.0
-offset_top = 4.0
-offset_right = 316.0
-offset_bottom = 14.0
+offset_left = 253.0
+offset_top = 153.0
+offset_right = 315.0
+offset_bottom = 177.0
+alignment = 2
+
+[node name="OpenShotTag" type="Label" parent="Camera2D/Screen/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "\"E\" Open Shop"
+horizontal_alignment = 1
+
+[node name="HealTag" type="Label" parent="Camera2D/Screen/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "\"SpaceBar\" Heal"
+horizontal_alignment = 1
 
 [node name="HurtBoxComponent" type="Area2D" parent="." groups=["Player"]]
 visible = false
@@ -295,4 +324,5 @@ position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_vcmon")
 
 [connection signal="frame_changed" from="Animations" to="FiniteStateMachine/Walk" method="_on_animations_frame_changed"]
+[connection signal="damaged" from="Camera2D/Screen/HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="Camera2D/Screen/HealthComponent" to="." method="_on_health_component_died"]

@@ -17,9 +17,7 @@ func physics_update(_delta: float) -> void:
 func exit() -> void:
     owner.is_running = false
 
-
 func _on_animations_frame_changed() -> void:
     if owner.sprite.animation == "walk":
         if owner.sprite.frame == 1 or owner.sprite.frame == 3:
             SFXManager.play("player:walk", true)
-        

@@ -1,9 +1,32 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://qicbns858sa7"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://qicbns858sa7"]
 
 [ext_resource type="FontFile" uid="uid://b4rr38yvm7bmm" path="res://Menu&UI/Font/POWER-UP.ttf" id="1_nusj3"]
+[ext_resource type="Texture2D" uid="uid://bekei2ees08h7" path="res://Menu&UI/Theme/CraftingTable/HSlider/Grabber.png" id="2_46jk6"]
 [ext_resource type="Texture2D" uid="uid://dvk5t0x4407ul" path="res://Menu&UI/Theme/CraftingTable/Panel.png" id="2_oiw6g"]
+[ext_resource type="Texture2D" uid="uid://cx386r05i7ttk" path="res://Menu&UI/Theme/CraftingTable/HSlider/GrabberArea.png" id="3_rtifx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oiw6g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_46jk6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtifx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qdgeb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ki0n8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nusj3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ki0n8"]
+texture = ExtResource("3_rtifx")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tikg1"]
+texture = ExtResource("3_rtifx")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_46jk6"]
+bg_color = Color(0.724885, 0.572544, 0.327629, 0)
+border_width_top = 8
+border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t4yqt"]
 texture = ExtResource("2_oiw6g")
@@ -15,8 +38,25 @@ texture_margin_bottom = 8.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t4yqt"]
 
 [resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/fonts/font = ExtResource("1_nusj3")
+Button/styles/disabled = SubResource("StyleBoxEmpty_oiw6g")
+Button/styles/focus = SubResource("StyleBoxEmpty_46jk6")
+Button/styles/hover = SubResource("StyleBoxEmpty_rtifx")
+Button/styles/normal = SubResource("StyleBoxEmpty_qdgeb")
+Button/styles/pressed = SubResource("StyleBoxEmpty_ki0n8")
 HSeparator/styles/separator = SubResource("StyleBoxEmpty_nusj3")
+HSlider/icons/grabber = ExtResource("2_46jk6")
+HSlider/icons/grabber_disabled = ExtResource("2_46jk6")
+HSlider/icons/grabber_highlight = ExtResource("2_46jk6")
+HSlider/styles/grabber_area = SubResource("StyleBoxTexture_ki0n8")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_tikg1")
+HSlider/styles/slider = SubResource("StyleBoxFlat_46jk6")
 Label/font_sizes/font_size = 10
 Label/fonts/font = ExtResource("1_nusj3")
+LinkButton/colors/font_color = Color(1, 1, 1, 1)
+LinkButton/font_sizes/font_size = 7
+LinkButton/fonts/font = ExtResource("1_nusj3")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_t4yqt")
 VSeparator/styles/separator = SubResource("StyleBoxEmpty_t4yqt")

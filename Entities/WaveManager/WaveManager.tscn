@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://nwimep630lw5"]
+
+[ext_resource type="Theme" uid="uid://qicbns858sa7" path="res://Menu&UI/Theme/CraftingTable/CraftingTable.tres" id="1_klskx"]
+[ext_resource type="Script" uid="uid://d3wib1caqiyap" path="res://Entities/WaveManager/WaveManager.gd" id="1_v3lpl"]
+
+[node name="WaveManager" type="Control"]
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_klskx")
+script = ExtResource("1_v3lpl")
+
+[node name="WarningPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 3.0
+offset_right = 65.0
+offset_bottom = 29.0
+grow_horizontal = 2
+
+[node name="WaveWarning" type="Label" parent="WarningPanel"]
+layout_mode = 2
+text = "Next Wave Start In:"
+horizontal_alignment = 1
+
+[node name="RestTime" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnDelay" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RestTime" to="." method="_on_rest_time_timeout"]
+[connection signal="timeout" from="SpawnDelay" to="." method="_on_spawn_delay_timeout"]

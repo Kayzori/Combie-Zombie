@@ -1,0 +1,184 @@
+[gd_scene load_steps=16 format=3 uid="uid://dowbolfl2jkqb"]
+
+[ext_resource type="Theme" uid="uid://qicbns858sa7" path="res://Menu&UI/Theme/CraftingTable/CraftingTable.tres" id="1_xc4b6"]
+[ext_resource type="Texture2D" uid="uid://df8hidxi5xfy3" path="res://Menu&UI/Theme/CraftingTable/Buttons/UpgradeButton.png" id="2_t4yqt"]
+[ext_resource type="Script" uid="uid://4rt433obnlg4" path="res://Menu&UI/Menu/Shop/Shop.gd" id="3_1oh77"]
+[ext_resource type="Texture2D" uid="uid://bbg62glr52y24" path="res://Menu&UI/Theme/CraftingTable/Buttons/CraftButton.png" id="4_1oh77"]
+[ext_resource type="PackedScene" uid="uid://byewhoyfiiwq0" path="res://Menu&UI/Menu/Shop/AmmoShop/AmmoShop.tscn" id="5_tlepi"]
+[ext_resource type="Resource" uid="uid://b1tr44t7mmku4" path="res://Resources/Shop/Ammo/PistolBullets.tres" id="7_ofijn"]
+[ext_resource type="Resource" uid="uid://c5wrc6ywwca0q" path="res://Resources/Shop/Ammo/ShotgunShells.tres" id="8_cuq14"]
+[ext_resource type="Resource" uid="uid://bbduhjjo1o30y" path="res://Resources/Shop/Ammo/SMGBullets.tres" id="9_cuq14"]
+[ext_resource type="Resource" uid="uid://b2gqn5gi3nrgd" path="res://Resources/Shop/Ammo/Midkit.tres" id="10_4cha3"]
+[ext_resource type="Texture2D" uid="uid://cdqr48dxheys2" path="res://Menu&UI/Theme/CraftingTable/Buttons/ReturnButton.png" id="10_l027n"]
+[ext_resource type="Resource" uid="uid://csnxq0nc1wsxp" path="res://Resources/Shop/Weapons/Pistol.res" id="12_cuq14"]
+[ext_resource type="Resource" uid="uid://g1b70vws38hj" path="res://Resources/Shop/Weapons/Shotgun.res" id="13_4cha3"]
+[ext_resource type="PackedScene" uid="uid://uncnmr5qky10" path="res://Menu&UI/Menu/Shop/WeaponShop/WeaponShop.tscn" id="13_fs4uv"]
+[ext_resource type="Resource" uid="uid://bjvitaiwwpkv4" path="res://Resources/Shop/Weapons/UMP.res" id="14_38hq5"]
+[ext_resource type="Resource" uid="uid://bw1wiibm60bwn" path="res://Resources/Shop/Weapons/Riffle.res" id="15_4cha3"]
+
+[node name="Shop" type="Control"]
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xc4b6")
+script = ExtResource("3_1oh77")
+
+[node name="Main" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = -31.0
+offset_right = 54.5
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Main/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Weapon"
+horizontal_alignment = 1
+
+[node name="WeaponMenu" type="TextureButton" parent="Main/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_t4yqt")
+stretch_mode = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Main/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Main/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Ammo"
+horizontal_alignment = 1
+
+[node name="AmmoMenu" type="TextureButton" parent="Main/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("4_1oh77")
+stretch_mode = 5
+
+[node name="MainMenuReturn" type="TextureButton" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("10_l027n")
+
+[node name="Ammo" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -16.0
+offset_right = 138.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ammo"]
+layout_mode = 2
+alignment = 1
+
+[node name="AmmoShops" type="GridContainer" parent="Ammo/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="AmmoShop4" parent="Ammo/VBoxContainer/AmmoShops" instance=ExtResource("5_tlepi")]
+layout_mode = 2
+tag = ExtResource("10_4cha3")
+
+[node name="AmmoShop" parent="Ammo/VBoxContainer/AmmoShops" instance=ExtResource("5_tlepi")]
+layout_mode = 2
+tag = ExtResource("7_ofijn")
+
+[node name="AmmoShop2" parent="Ammo/VBoxContainer/AmmoShops" instance=ExtResource("5_tlepi")]
+layout_mode = 2
+tag = ExtResource("8_cuq14")
+
+[node name="AmmoShop3" parent="Ammo/VBoxContainer/AmmoShops" instance=ExtResource("5_tlepi")]
+layout_mode = 2
+tag = ExtResource("9_cuq14")
+
+[node name="MenuReturn" type="TextureButton" parent="Ammo/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("10_l027n")
+
+[node name="Weapon" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -16.0
+offset_right = 138.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Weapon"]
+layout_mode = 2
+alignment = 2
+
+[node name="WeaponShops" type="GridContainer" parent="Weapon/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 2
+
+[node name="WeaponShop" parent="Weapon/VBoxContainer/WeaponShops" instance=ExtResource("13_fs4uv")]
+layout_mode = 2
+tag = ExtResource("12_cuq14")
+
+[node name="WeaponShop2" parent="Weapon/VBoxContainer/WeaponShops" instance=ExtResource("13_fs4uv")]
+layout_mode = 2
+tag = ExtResource("13_4cha3")
+
+[node name="WeaponShop3" parent="Weapon/VBoxContainer/WeaponShops" instance=ExtResource("13_fs4uv")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tag = ExtResource("14_38hq5")
+
+[node name="WeaponShop4" parent="Weapon/VBoxContainer/WeaponShops" instance=ExtResource("13_fs4uv")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tag = ExtResource("15_4cha3")
+
+[node name="MenuReturn" type="TextureButton" parent="Weapon/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("10_l027n")
+stretch_mode = 5
+
+[connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/VBoxContainer/WeaponMenu" to="." method="_on_weapon_menu_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/HBoxContainer/VBoxContainer2/AmmoMenu" to="." method="_on_ammo_menu_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/MainMenuReturn" to="." method="_on_main_menu_return_pressed"]
+[connection signal="pressed" from="Ammo/VBoxContainer/MenuReturn" to="." method="_on_menu_return_pressed"]
+[connection signal="pressed" from="Weapon/VBoxContainer/MenuReturn" to="." method="_on_menu_return_pressed"]

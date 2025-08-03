@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://uncnmr5qky10"]
+
+[ext_resource type="Theme" uid="uid://qicbns858sa7" path="res://Menu&UI/Theme/CraftingTable/CraftingTable.tres" id="1_h1ayn"]
+[ext_resource type="Script" uid="uid://dqx06ge8ycabt" path="res://Menu&UI/Menu/Shop/WeaponShop/WeaponShop.gd" id="2_wc6kk"]
+[ext_resource type="Texture2D" uid="uid://h6tgp7guvvij" path="res://Menu&UI/Theme/CraftingTable/Buttons/BuyButton.png" id="3_6iktt"]
+
+[node name="WeaponShop" type="PanelContainer"]
+offset_right = 66.0
+offset_bottom = 32.0
+theme = ExtResource("1_h1ayn")
+script = ExtResource("2_wc6kk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "x0"
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = " -->"
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("3_6iktt")
+stretch_mode = 5
+
+[connection signal="pressed" from="HBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]

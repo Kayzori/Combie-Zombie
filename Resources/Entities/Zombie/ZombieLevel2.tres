@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ZombieStats" load_steps=2 format=3 uid="uid://1veo2tvjehog"]
+
+[ext_resource type="Script" uid="uid://bbmvcex3eej7r" path="res://Entities/Zombie/ZombieStats.gd" id="1_l215k"]
+
+[resource]
+script = ExtResource("1_l215k")
+health = 100.0
+damage = 12.0
+speed = 80.0
+drop_chance = 1.0
+metadata/_custom_type_script = "uid://bbmvcex3eej7r"

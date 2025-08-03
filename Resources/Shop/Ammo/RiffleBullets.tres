@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AmmoShopTag" load_steps=5 format=3 uid="uid://d135pvptn0u6a"]
+
+[ext_resource type="Resource" uid="uid://dc8h1mpf8kbef" path="res://Resources/Items/RiffleBullets.tres" id="1_ba5qo"]
+[ext_resource type="Script" uid="uid://dekp5wv8yamy4" path="res://Menu&UI/Menu/Shop/AmmoShop/AmmoShopTag.gd" id="1_hco21"]
+[ext_resource type="Resource" uid="uid://dvt7aih05k4u3" path="res://Resources/Items/Blood.tres" id="2_smtrb"]
+[ext_resource type="PackedScene" uid="uid://blgqlxfx8wbjk" path="res://Resources/Weapons/Guns/Riffle.tscn" id="4_yihdy"]
+
+[resource]
+script = ExtResource("1_hco21")
+spend_item_tag = ExtResource("2_smtrb")
+spending = 5
+earn_item_tag = ExtResource("1_ba5qo")
+earning = 3
+weapon_needed = ExtResource("4_yihdy")
+metadata/_custom_type_script = "uid://dekp5wv8yamy4"

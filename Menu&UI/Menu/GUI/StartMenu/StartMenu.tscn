@@ -1,0 +1,349 @@
+[gd_scene load_steps=17 format=3 uid="uid://bsb2rm54ulegd"]
+
+[ext_resource type="TileSet" uid="uid://i8mvqnixjki1" path="res://World/Tilemap/TileSet.tres" id="1_bp66j"]
+[ext_resource type="Script" uid="uid://bkg2jrxycuq1h" path="res://Menu&UI/Menu/GUI/StartMenu/StartMenu.gd" id="1_kiomc"]
+[ext_resource type="Theme" uid="uid://qicbns858sa7" path="res://Menu&UI/Theme/CraftingTable/CraftingTable.tres" id="1_yweta"]
+[ext_resource type="Texture2D" uid="uid://chun0i2860fkw" path="res://Entities/Player/Art/SpriteSheet.png" id="2_mq1g6"]
+[ext_resource type="Script" uid="uid://jol1tqiiuiyf" path="res://Menu&UI/Menu/GUI/StartMenu/VolumeSlider.gd" id="5_dq3qy"]
+[ext_resource type="Texture2D" uid="uid://cdqr48dxheys2" path="res://Menu&UI/Theme/CraftingTable/Buttons/ReturnButton.png" id="6_dq3qy"]
+[ext_resource type="PackedScene" uid="uid://cdvhofp28qsah" path="res://Menu&UI/Menu/GUI/Transition.tscn" id="7_0j1ar"]
+[ext_resource type="Texture2D" uid="uid://cx8to700sgd04" path="res://Menu&UI/Menu/GUI/StartMenu/Credit/Kayzori_pfp.png" id="7_gorgc"]
+[ext_resource type="Texture2D" uid="uid://bi46lpvf5wd1j" path="res://Menu&UI/Menu/GUI/StartMenu/Credit/Calamitywalk_pfp.png" id="8_pv20e"]
+[ext_resource type="Texture2D" uid="uid://7rwwwj5oa1sk" path="res://Menu&UI/Menu/GUI/StartMenu/Credit/Just-ab_pfp-export.png" id="9_phn57"]
+
+[sub_resource type="Shader" id="Shader_0j1ar"]
+code = "shader_type canvas_item;
+
+// Animate from 0 to 1
+uniform float progress: hint_range(0.0, 1.0) = 0.0;
+
+// How jagged each band of melting pixels are
+uniform float meltiness: hint_range(0.0, 16.0) = 1.0;
+
+float psuedo_rand(float x) {
+	return mod(x * 2048103.0 + cos(x * 1912.0), 1.0);
+}
+
+void fragment() {
+	vec2 uv = UV;
+	
+	// Move pixels near the top faster
+	uv.y -= progress / UV.y;
+	
+	// Created jagged edges for each pixel on the x-axis 
+	uv.y -= progress * meltiness * psuedo_rand(UV.x - mod(UV.x, TEXTURE_PIXEL_SIZE.x));
+	
+	COLOR = texture(TEXTURE, uv);
+	
+	// \"delete\" pixels out of range
+	if (uv.y <= 0.0) {
+		COLOR.a = 0.0;
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p7utm"]
+shader = SubResource("Shader_0j1ar")
+shader_parameter/progress = 0.0
+shader_parameter/meltiness = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2rcb"]
+atlas = ExtResource("2_mq1g6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiomc"]
+atlas = ExtResource("2_mq1g6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dq3qy"]
+atlas = ExtResource("2_mq1g6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3k48x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2rcb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kiomc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dq3qy")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="StartMenu" type="Node2D"]
+material = SubResource("ShaderMaterial_p7utm")
+script = ExtResource("1_kiomc")
+
+[node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
+use_parent_material = true
+position = Vector2(224, 96)
+tile_set = ExtResource("1_bp66j")
+format = 2
+layer_0/name = "Ground"
+layer_0/z_index = -1
+layer_0/tile_data = PackedInt32Array(-262149, 327680, 0, -196613, 327680, 0, -131077, 327680, 0, -65541, 327680, 0, -5, 327680, 0, 65531, 327680, 0, 131067, 327680, 0, 196603, 327680, 0, 262139, 327680, 0, 327675, 327680, 0, 393211, 327680, 0, -262148, 327680, 0, -196612, 327680, 0, -131076, 327680, 0, -65540, 327680, 0, -4, 327680, 0, 65532, 327680, 0, 131068, 327680, 0, 196604, 327680, 0, 262140, 327680, 0, 327676, 327680, 0, 393212, 327680, 0, -262147, 327680, 0, -196611, 327680, 0, -131075, 327680, 0, -65539, 327680, 0, -3, 327680, 0, 65533, 327680, 0, 131069, 327680, 0, 196605, 327680, 0, 262141, 327680, 0, 327677, 327680, 0, 393213, 327680, 0, -262146, 327680, 0, -196610, 327680, 0, -131074, 327680, 0, -65538, 327680, 0, -2, 327680, 0, 65534, 327680, 0, 131070, 327680, 0, 196606, 327680, 0, 262142, 327680, 0, 327678, 327680, 0, 393214, 327680, 0, -262145, 327680, 0, -196609, 327680, 0, -131073, 327680, 0, -65537, 327680, 0, -1, 327680, 0, 65535, 327680, 0, 131071, 327680, 0, 196607, 327680, 0, 262143, 327680, 0, 327679, 327680, 0, 393215, 327680, 0, -327680, 327680, 0, -262144, 327680, 0, -196608, 327680, 0, -131072, 327680, 0, -65536, 327680, 0, 0, 327680, 0, 65536, 327680, 0, 131072, 327680, 0, 196608, 327680, 0, 262144, 327680, 0, 327680, 327680, 0, -327679, 327680, 0, -262143, 327680, 0, -196607, 327680, 0, -131071, 327680, 0, -65535, 327680, 0, 1, 327680, 0, 65537, 327680, 0, 131073, 327680, 0, 196609, 327680, 0, 262145, 327680, 0, 327681, 327680, 0, -327678, 327680, 0, -262142, 327680, 0, -196606, 327680, 0, -131070, 327680, 0, -65534, 327680, 0, 2, 327680, 0, 65538, 327680, 0, 131074, 327680, 0, 196610, 327680, 0, 262146, 327680, 0, 327682, 327680, 0, -327677, 327680, 0, -262141, 327680, 0, -196605, 327680, 0, -131069, 327680, 0, -65533, 327680, 0, 3, 327680, 0, 65539, 327680, 0, 131075, 327680, 0, 196611, 327680, 0, 262147, 327680, 0, 327683, 327680, 0, -327676, 327680, 0, -262140, 327680, 0, -196604, 327680, 0, -131068, 327680, 0, -65532, 327680, 0, 4, 327680, 0, 65540, 327680, 0, 131076, 327680, 0, 196612, 327680, 0, 262148, 327680, 0, 327684, 327680, 0, -327675, 327680, 0, -262139, 327680, 0, -196603, 327680, 0, -131067, 327680, 0, -65531, 327680, 0, 5, 327680, 0, 65541, 327680, 0, 131077, 327680, 0, 196613, 327680, 0, 262149, 327680, 0, 327685, 327680, 0, -327674, 327680, 0, -262138, 327680, 0, -196602, 327680, 0, -131066, 327680, 0, -65530, 327680, 0, 6, 327680, 0, 65542, 327680, 0, 131078, 327680, 0, 196614, 327680, 0, 262150, 327680, 0, 327686, 327680, 0, -327694, 327680, 0, -262158, 327680, 0, -196622, 327680, 0, -131086, 327680, 0, -65550, 327680, 0, -14, 327680, 0, 65522, 327680, 0, 131058, 327680, 0, 196594, 327680, 0, 262130, 327680, 0, 327666, 327680, 0, 393202, 327680, 0, -327693, 327680, 0, -262157, 327680, 0, -196621, 327680, 0, -131085, 327680, 0, -65549, 327680, 0, -13, 327680, 0, 65523, 327680, 0, 131059, 327680, 0, 196595, 327680, 0, 262131, 327680, 0, 327667, 327680, 0, 393203, 327680, 0, -327692, 327680, 0, -262156, 327680, 0, -196620, 327680, 0, -131084, 327680, 0, -65548, 327680, 0, -12, 327680, 0, 65524, 327680, 0, 131060, 327680, 0, 196596, 327680, 0, 262132, 327680, 0, 327668, 327680, 0, 393204, 327680, 0, -327691, 327680, 0, -262155, 327680, 0, -196619, 327680, 0, -131083, 327680, 0, -65547, 327680, 0, -11, 327680, 0, 65525, 327680, 0, 131061, 327680, 0, 196597, 327680, 0, 262133, 327680, 0, 327669, 327680, 0, 393205, 327680, 0, -327690, 327680, 0, -262154, 327680, 0, -196618, 327680, 0, -131082, 327680, 0, -65546, 327680, 0, -10, 327680, 0, 65526, 327680, 0, 131062, 327680, 0, 196598, 327680, 0, 262134, 327680, 0, 327670, 327680, 0, 393206, 327680, 0, -327689, 327680, 0, -262153, 327680, 0, -196617, 327680, 0, -131081, 327680, 0, -65545, 327680, 0, -9, 327680, 0, 65527, 327680, 0, 131063, 327680, 0, 196599, 327680, 0, 262135, 327680, 0, 327671, 327680, 0, 393207, 327680, 0, -327688, 327680, 0, -262152, 327680, 0, -196616, 327680, 0, -131080, 327680, 0, -65544, 327680, 0, -8, 327680, 0, 65528, 327680, 0, 131064, 327680, 0, 196600, 327680, 0, 262136, 327680, 0, 327672, 327680, 0, 393208, 327680, 0, -327687, 327680, 0, -262151, 327680, 0, -196615, 327680, 0, -131079, 327680, 0, -65543, 327680, 0, -7, 327680, 0, 65529, 327680, 0, 131065, 327680, 0, 196601, 327680, 0, 262137, 327680, 0, 327673, 327680, 0, 393209, 327680, 0, -327686, 327680, 0, -262150, 327680, 0, -196614, 327680, 0, -131078, 327680, 0, -65542, 327680, 0, -6, 327680, 0, 65530, 327680, 0, 131066, 327680, 0, 196602, 327680, 0, 262138, 327680, 0, 327674, 327680, 0, 393210, 327680, 0, -327685, 327680, 0, -327684, 327680, 0, -327683, 327680, 0, -327682, 327680, 0, -327681, 327680, 0, -393216, 327680, 0, -393215, 327680, 0, -393214, 327680, 0, -393213, 327680, 0, -393212, 327680, 0, -393211, 327680, 0, -393210, 327680, 0, -393231, 327680, 0, -327695, 327680, 0, -262159, 327680, 0, -196623, 327680, 0, -131087, 327680, 0, -65551, 327680, 0, -15, 327680, 0, 65521, 327680, 0, 131057, 327680, 0, 196593, 327680, 0, 262129, 327680, 0, 327665, 327680, 0, 393201, 327680, 0, -393230, 327680, 0, -393229, 327680, 0, -393228, 327680, 0, -393227, 327680, 0, -393226, 327680, 0, -393225, 327680, 0, -393224, 327680, 0, -393223, 327680, 0, -393222, 327680, 0, -393221, 327680, 0, -393220, 327680, 0, -393219, 327680, 0, -393218, 327680, 0, -393217, 327680, 0, -458752, 327680, 0, -458751, 327680, 0, -458750, 327680, 0, -458749, 327680, 0, -458748, 327680, 0, -458747, 327680, 0, -458746, 327680, 0)
+layer_1/name = "Structures"
+layer_1/y_sort_enabled = true
+layer_1/tile_data = PackedInt32Array(-65538, 0, 3, 327682, 0, 0, 65542, 196608, 0, 65541, 196608, 0, 196606, 196608, 0, 196605, 196608, 0, 327666, 0, 0, 65527, 0, 0, -196622, 0, 0, -393222, 0, 0, -458749, 0, 0, -15, 196608, 0, -14, 196608, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
+position = Vector2(231, 97)
+sprite_frames = SubResource("SpriteFrames_3k48x")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.458133
+
+[node name="Border" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 23.0
+offset_top = 21.0
+offset_right = 293.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_yweta")
+
+[node name="Main" type="PanelContainer" parent="Border"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -47.0
+offset_right = 97.0
+offset_bottom = 47.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Border/Main"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Border/Main/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Combie Zombie"
+
+[node name="HSeparator" type="HSeparator" parent="Border/Main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Play" type="Button" parent="Border/Main/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Options" type="Button" parent="Border/Main/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Credit" type="Button" parent="Border/Main/VBoxContainer"]
+layout_mode = 2
+text = "Credit"
+
+[node name="HSeparator3" type="HSeparator" parent="Border/Main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Options" type="PanelContainer" parent="Border"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -25.5
+offset_right = 97.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Border/Options"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Border/Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Border/Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="VSeparator" type="VSeparator" parent="Border/Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VolumeSlider" type="HSlider" parent="Border/Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -0.5
+max_value = 5.0
+step = 0.01
+value = 5.0
+script = ExtResource("5_dq3qy")
+bus = "Master"
+
+[node name="MainReturn" type="TextureButton" parent="Border/Options/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_dq3qy")
+stretch_mode = 3
+
+[node name="Credit" type="PanelContainer" parent="Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -74.5
+offset_right = 75.0
+offset_bottom = 73.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Border/Credit"]
+layout_mode = 2
+
+[node name="Kayzori" type="HBoxContainer" parent="Border/Credit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Border/Credit/VBoxContainer/Kayzori"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Border/Credit/VBoxContainer/Kayzori/Control"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 324.0
+offset_bottom = 324.0
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_gorgc")
+
+[node name="VSeparator" type="VSeparator" parent="Border/Credit/VBoxContainer/Kayzori"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Border/Credit/VBoxContainer/Kayzori"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Border/Credit/VBoxContainer/Kayzori/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "Kayzori
+Producer, Designer, Programmer
+Pixel Artist"
+clip_text = true
+
+[node name="LinkButton" type="LinkButton" parent="Border/Credit/VBoxContainer/Kayzori/VBoxContainer"]
+layout_mode = 2
+text = "itch.io page"
+uri = "https://kayzori.itch.io/"
+
+[node name="HSeparator3" type="HSeparator" parent="Border/Credit/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Calamitywalk" type="HBoxContainer" parent="Border/Credit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Border/Credit/VBoxContainer/Calamitywalk"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Border/Credit/VBoxContainer/Calamitywalk/Control"]
+layout_mode = 2
+offset_left = 4.0
+offset_right = 514.0
+offset_bottom = 510.0
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("8_pv20e")
+
+[node name="VSeparator" type="VSeparator" parent="Border/Credit/VBoxContainer/Calamitywalk"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Border/Credit/VBoxContainer/Calamitywalk"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Border/Credit/VBoxContainer/Calamitywalk/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "Calamitywalk
+Audio Designer, SFX Designer"
+
+[node name="LinkButton" type="LinkButton" parent="Border/Credit/VBoxContainer/Calamitywalk/VBoxContainer"]
+layout_mode = 2
+text = "itch.io page"
+uri = "https://calamitywalk.itch.io/"
+
+[node name="HSeparator2" type="HSeparator" parent="Border/Credit/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Just-ab" type="HBoxContainer" parent="Border/Credit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Border/Credit/VBoxContainer/Just-ab"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Border/Credit/VBoxContainer/Just-ab/Control"]
+layout_mode = 2
+offset_left = 4.0
+offset_right = 324.0
+offset_bottom = 320.0
+scale = Vector2(0.035, 0.035)
+texture = ExtResource("9_phn57")
+
+[node name="VSeparator" type="VSeparator" parent="Border/Credit/VBoxContainer/Just-ab"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Border/Credit/VBoxContainer/Just-ab"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Border/Credit/VBoxContainer/Just-ab/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "Just-ab
+Pixel Artist, Tester"
+
+[node name="LinkButton" type="LinkButton" parent="Border/Credit/VBoxContainer/Just-ab/VBoxContainer"]
+layout_mode = 2
+text = "itch.io page"
+uri = "https://just-ab.itch.io/"
+
+[node name="HSeparator" type="HSeparator" parent="Border/Credit/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MainReturn" type="TextureButton" parent="Border/Credit/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_dq3qy")
+stretch_mode = 5
+
+[node name="Transition" parent="." instance=ExtResource("7_0j1ar")]
+unique_name_in_owner = true
+
+[connection signal="pressed" from="Border/Main/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Border/Main/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Border/Main/VBoxContainer/Credit" to="." method="_on_credit_pressed"]
+[connection signal="pressed" from="Border/Options/VBoxContainer/MainReturn" to="." method="_on_main_return_pressed"]
+[connection signal="pressed" from="Border/Credit/VBoxContainer/MainReturn" to="." method="_on_main_return_pressed"]

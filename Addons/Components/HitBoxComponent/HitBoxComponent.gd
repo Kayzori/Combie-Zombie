@@ -2,7 +2,7 @@ extends Area2D
 class_name HitBoxComponent
 
 @export var target_group: String
-@export var damage: int = 10
+@export var damage: float = 10
 @export var hit_delay: float
 
 var time: float = 0.0
@@ -20,7 +20,6 @@ func _process(delta: float) -> void:
     if time >= hit_delay:
         time = 0
         entred_area.receive_hit(damage)
-    
 
 func _on_area_entered(area: Area2D) -> void:
     if area is HurtBoxComponent and area.is_in_group(target_group):
